@@ -19,7 +19,7 @@ namespace WpfAppCalcolatrice;
 public partial class MainWindow : Window
 {
 
-    double primoNumero, secondoNumero;
+    double valorePrecedente, valoreCorrente;
     OperazioneSelezionata operazioneSelezionata;
 
 
@@ -87,10 +87,50 @@ public partial class MainWindow : Window
     {
         if (sender == percentualeButton)
         {
-            if (double.TryParse(risultatoLabel.Content.ToString(), out double primoNumero))
+
+            if (double.TryParse(risultatoLabel.Content.ToString(), out double valoreCorrente))
             {
-                primoNumero /= 100;
-                risultatoLabel.Content = primoNumero.ToString();
+                // 50 + 5% = 50 + 50/100*5
+                // 50 * 10% = 50 * 10*50/100 =250
+                // valorePrecedente + (valorePrecedente * valoreCorrente / 100)
+                double risultato = 0;
+
+                switch (operazioneSelezionata)
+                {
+                    case OperazioneSelezionata.Addizione:
+                        risultato = valorePrecedente + (valorePrecedente * valoreCorrente / 100);
+                        break;
+
+                    case OperazioneSelezionata.Sottrazione:
+                        risultato = valorePrecedente - (valorePrecedente * valoreCorrente / 100);
+                        break;
+
+                    case OperazioneSelezionata.Moltiplicazione:
+                        risultato = valorePrecedente * (valorePrecedente * valoreCorrente / 100);
+                        break;
+
+                    case OperazioneSelezionata.Divisione:
+                        if (valoreCorrente != 0)
+                            risultato = valorePrecedente / (valorePrecedente * valoreCorrente / 100);
+                        else
+                        {
+
+                            MessageBox.Show("Divisore nullo", "Operazione impossibile", MessageBoxButton.OK, MessageBoxImage.Error);
+                            risultatoLabel.Content = valorePrecedente.ToString();
+                                              
+                        }
+                        break;  
+
+
+                    default:
+                        // Se non è stata selezionata un'operazione
+                        risultato = valoreCorrente / 100;
+                        break;
+                }
+                risultatoLabel.Content = risultato.ToString("0.################", CultureInfo.CurrentCulture);
+                operazioneSelezionata = OperazioneSelezionata.Nessuna;
+                valorePrecedente = risultato; // Salva il nuovo valore per eventuali operazioni successive
+                valoreCorrente = 0; // Resetta il secondo numero dopo l'operazione
 
             }
         }
@@ -143,7 +183,7 @@ public partial class MainWindow : Window
 
     private void OperazioneButton_Click(object sender, RoutedEventArgs e)
     {
-        if (double.TryParse(risultatoLabel.Content.ToString(), out primoNumero))
+        if (double.TryParse(risultatoLabel.Content.ToString(), out valorePrecedente))
         {
             risultatoLabel.Content = "0";
         }
@@ -168,6 +208,7 @@ public partial class MainWindow : Window
         {
             operazioneSelezionata = OperazioneSelezionata.Divisione;
         }
+
     }
 
     private void UgualeButton_Click(object sender, RoutedEventArgs e)
@@ -177,38 +218,35 @@ public partial class MainWindow : Window
         {
             // Il secondoNumero è quello inserito dopo l'operazione selezionata
 
-            if (double.TryParse(risultatoLabel.Content.ToString(), out secondoNumero))
+            if (double.TryParse(risultatoLabel.Content.ToString(), out valoreCorrente))
             {
                 switch (operazioneSelezionata)
                 {
                     case OperazioneSelezionata.Addizione:
-                        this.primoNumero = Matematica.Add(primoNumero, secondoNumero);
+                        this.valorePrecedente = Matematica.Add(valorePrecedente, valoreCorrente);
                         break;
                     case OperazioneSelezionata.Sottrazione:
-                        this.primoNumero = Matematica.Subtract(primoNumero, secondoNumero);
+                        this.valorePrecedente = Matematica.Subtract(valorePrecedente, valoreCorrente);
                         break;
                     case OperazioneSelezionata.Moltiplicazione:
-                        this.primoNumero = Matematica.Multiply(primoNumero, secondoNumero);
+                        this.valorePrecedente = Matematica.Multiply(valorePrecedente, valoreCorrente);
                         break;
                     case OperazioneSelezionata.Divisione:
-                        this.primoNumero = Matematica.Divide(primoNumero, secondoNumero);
+                        this.valorePrecedente = Matematica.Divide(valorePrecedente, valoreCorrente);
                         break;
                 }
 
-                risultatoLabel.Content = this.primoNumero.ToString("0.################", CultureInfo.CurrentCulture);
+                risultatoLabel.Content = this.valorePrecedente.ToString("0.################", CultureInfo.CurrentCulture);
 
-                secondoNumero = 0; // Resetta il secondo numero dopo l'operazione
+                valoreCorrente = 0; // Resetta il secondo numero dopo l'operazione
             }
         }
 
     }
 
-
- 
-
-
     public enum OperazioneSelezionata
     {
+        Nessuna, // Il primo valore è quello di default, quando non è stata selezionata nessuna operazione
         Addizione,
         Sottrazione,
         Divisione,
@@ -220,7 +258,16 @@ public partial class MainWindow : Window
         public static double Add(double a, double b) => a + b;
         public static double Subtract(double a, double b) => a - b;
         public static double Multiply(double a, double b) => a * b;
-        public static double Divide(double a, double b) => b != 0 ? a / b : throw new DivideByZeroException("Divisione per zero non permessa.");
+        public static double Divide(double a, double b)
+        {
+            if (b == 0)
+            {
+                MessageBox.Show("Divisore nullo", "Operazione impossibile", MessageBoxButton.OK, MessageBoxImage.Error);
+            return 0; // Ritorna 0 ed esce dal metodo.
+            }
+
+            return a / b;
+        }
     }
 
 }

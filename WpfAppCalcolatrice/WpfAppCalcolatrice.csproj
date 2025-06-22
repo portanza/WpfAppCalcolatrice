@@ -8,4 +8,30 @@
     <UseWPF>true</UseWPF>
   </PropertyGroup>
 
+  <ItemGroup>
+    <None Remove="Risorse\LogoAQA.ico" />
+    <None Remove="Risorse\LogoAQA1024.ico" />
+    <None Remove="Risorse\LogoAQA32.ico" />
+    <None Remove="Risorse\LogoAQA64.ico" />
+    <None Remove="Risorse\LogoAQAritagliataSoloAla.ico" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Risorse\LogoAQA.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Risorse\LogoAQA1024.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Risorse\LogoAQA32.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Risorse\LogoAQA64.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Risorse\LogoAQAritagliataSoloAla.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
 </Project>
