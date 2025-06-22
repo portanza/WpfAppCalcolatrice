@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfAppCalcolatrice"
         mc:Ignorable="d"
-        Title="Lu-Calcolatrice" Height="525" Width="350">    
+        Title="Calcolatrice       Ing. Luca Filippone" Height="525" Width="350">    
     <Grid Margin="10">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" />
