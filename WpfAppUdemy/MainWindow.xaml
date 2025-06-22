@@ -1,0 +1,83 @@
+﻿<Window x:Class="WpfAppCalcolatrice.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfAppCalcolatrice"
+        mc:Ignorable="d"
+        Title="Lu-Calcolatrice" Height="525" Width="350">    
+    <Grid Margin="10">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="2*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <Label x:Name="risultatoLabel" Content="0" HorizontalAlignment="Right" VerticalAlignment="Bottom" FontSize="60" Grid.ColumnSpan="4"/>
+        <Button x:Name="acButton" 
+                Content="AC"  Grid.Column="0" Grid.Row="1" Margin="5"/>
+        <Button x:Name="negativoButton" 
+                Content="+/-"  Grid.Column="1" Grid.Row="1" Margin="5"/>
+        <Button x:Name="percentualeButton" 
+                Content="%"  Grid.Column="2" Grid.Row="1" Margin="5"/>
+        <Button x:Name="dividiButton" 
+                Content="/"  Grid.Column="3" Grid.Row="1" Margin="5"/>
+
+        <Button x:Name="setteButton" 
+
+                Content="7"  Grid.Column="0" Grid.Row="2" Margin="5"/>
+        <Button x:Name="ottoButton" 
+ 
+                Content="8"  Grid.Column="1" Grid.Row="2" Margin="5"/>
+        <Button x:Name="noveButton" 
+
+                Content="9"  Grid.Column="2" Grid.Row="2" Margin="5"/>
+        <Button x:Name="moltiplicaButton" 
+                Content="*"  Grid.Column="3" Grid.Row="2" Margin="5"/>
+
+        <Button x:Name="quattroButton" 
+ 
+                Content="4"  Grid.Column="0" Grid.Row="3" Margin="5"/>
+        <Button x:Name="cinqueButton" 
+           
+                Content="5"  Grid.Column="1" Grid.Row="3" Margin="5"/>
+        <Button x:Name="seiButton" 
+        
+                Content="6"  Grid.Column="2" Grid.Row="3" Margin="5"/>
+        <Button x:Name="menoButton" 
+                Content="-"  Grid.Column="3" Grid.Row="3" Margin="5"/>
+
+        <Button x:Name="unoButton" 
+                
+                Content="1"  Grid.Column="0" Grid.Row="4" Margin="5"/>
+        <Button x:Name="dueButton" 
+              
+                Content="2"  Grid.Column="1" Grid.Row="4" Margin="5"/>
+        <Button x:Name="treButton" 
+                
+                Content="3"  Grid.Column="2" Grid.Row="4" Margin="5"/>
+        <Button x:Name="piuButton" 
+               
+                Content="+"  Grid.Column="3" Grid.Row="4" Margin="5"/>
+
+        <Button x:Name="zeroButton" 
+                
+                Content="0"  Grid.Column="0" Grid.Row="5" Margin="5"  Grid.ColumnSpan="2"/>
+        <Button x:Name="virgolaButton" 
+                
+                Content=","  Grid.Column="2" Grid.Row="5" Margin="5"/>
+        <Button x:Name="ugualeButton" 
+                
+                Content="="  Grid.Column="3" Grid.Row="5" Margin="5"/>
+        
+        
+    </Grid>
+</Window>
